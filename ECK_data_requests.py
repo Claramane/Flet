@@ -177,9 +177,10 @@ def get_image(ChartNo, soup):
     exam_img_list = []
 
     for i in radiation: 
-        accessionNumber = str(i.find_all("td")[0].text)
-        exam_catalogy = str(i.find_all("td")[1].text).strip()
-        time = str(i.find_all("td")[2].text)
+        accessionNumber = str(i.find_all("td")[6].text)
+        exam_name = str(i.find("span").text)
+        # exam_catalogy = str(i.find_all("td")[1].text).strip()
+        time = str(i.find_all("td")[1].text)
         img_url = f"http://172.23.0.10/html5/ShowImage.html?psHash={psHash}&accessionNumber={accessionNumber}"
         report_url = f"http://172.20.110.185/home/XrayDataByApplyNo?applyNo={accessionNumber}"
 
@@ -195,8 +196,7 @@ def get_image(ChartNo, soup):
         # impression = str(report_content.find_all("pre")[1].text).strip()
 
         dict = {
-            # "exam_name": exam_name,
-            "exam_catalogy": exam_catalogy,
+            "exam_name": exam_name,
             "accessionNumber": accessionNumber,
             "img_url": img_url,
             "report_url" : report_url,
@@ -207,9 +207,9 @@ def get_image(ChartNo, soup):
         radiation_list.append(dict)
 
     for i in exam_img:
-        accessionNumber = str(i.find_all("td")[0].text)
-        exam_name = str(i.find_all("td")[1].text).strip()
-        time = str(i.find_all("td")[3].text)
+        accessionNumber = str(i.find_all("td")[7].text)
+        exam_name = str(i.find_all("td")[0].text).strip()
+        time = str(i.find_all("td")[2].text)
         img_url = f"http://172.23.0.10/html5/ShowImage.html?psHash={psHash}&accessionNumber={accessionNumber}"
         report_url = f"http://172.20.110.185/home/ExamDataByApplyNo?applyNo={accessionNumber}"
 
